@@ -103,6 +103,7 @@ class FlutterUVCCameraPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             // Capture operations
             "takePicture" -> {
                 val savePath = call.argument<String>("savePath")
+                android.util.Log.d("takePicture", "FlutterUVCCameraPlugin - savePath: $savePath")
                 mUVCCameraViewFactory.takePicture(
                     object : UVCStringCallback {
                         override fun onSuccess(path: String) {

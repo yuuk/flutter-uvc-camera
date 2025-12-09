@@ -30,6 +30,7 @@ class UVCCameraViewFactory(
     }
 
     fun takePicture(callback: UVCStringCallback, savePath: String? = null) {
+        android.util.Log.d("takePicture", "UVCCameraViewFactory - savePath: $savePath")
         cameraView.takePicture(callback, savePath)
     }
     

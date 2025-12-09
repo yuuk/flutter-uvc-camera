@@ -152,3 +152,50 @@ flutter run
 ## 版本兼容性
 
 本修改向下兼容，原有不带参数的调用方式仍然可用。
+
+---
+
+## 补充修改：添加日志打印验证
+
+为了验证 savePath 参数是否正确传递到 captureImage 方法，在以下位置添加了日志打印：
+
+### 1. `android/src/main/kotlin/com/chenyeju/FlutterUVCCameraPlugin.kt`
+**添加位置**：第106行
+```kotlin
+android.util.Log.d("takePicture", "FlutterUVCCameraPlugin - savePath: $savePath")
+```
+
+### 2. `android/src/main/kotlin/com/chenyeju/UVCCameraViewFactory.kt`
+**添加位置**：第33行
+```kotlin
+android.util.Log.d("takePicture", "UVCCameraViewFactory - savePath: $savePath")
+```
+
+### 3. `android/src/main/kotlin/com/chenyeju/UVCCameraView.kt`
+**添加位置**：第605行和第430行
+```kotlin
+android.util.Log.d("takePicture", "UVCCameraView - savePath: $savePath")
+android.util.Log.d("captureImage", "UVCCameraView - About to call captureImage with savePath: $savePath")
+```
+
+## 日志查看方法
+
+### 1. Android Studio Logcat
+- 过滤标签：`takePicture` 或 `captureImage`
+
+### 2. ADB 命令
+```bash
+adb logcat -s takePicture
+# 或
+adb logcat -s captureImage
+```
+
+## 预期日志输出
+```
+D/takePicture: FlutterUVCCameraPlugin - savePath: /storage/emulated/0/DCIM/MyApp/photo_123456.jpg
+D/takePicture: UVCCameraViewFactory - savePath: /storage/emulated/0/DCIM/MyApp/photo_123456.jpg
+D/takePicture: UVCCameraView - savePath: /storage/emulated/0/DCIM/MyApp/photo_123456.jpg
+D/captureImage: UVCCameraView - About to call captureImage with savePath: /storage/emulated/0/DCIM/MyApp/photo_123456.jpg
+```
+
+通过这些日志，可以清楚地看到 savePath 参数在调用链中的传递情况。

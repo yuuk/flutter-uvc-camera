@@ -427,6 +427,7 @@ internal class UVCCameraView(
     fun getDefaultEffect() = getCurrentCamera()?.getDefaultEffect()
 
     private fun captureImage(callBack: ICaptureCallBack, savePath: String? = null) {
+        android.util.Log.d("captureImage", "UVCCameraView - About to call captureImage with savePath: $savePath")
         getCurrentCamera()?.captureImage(callBack, savePath)
     }
 
@@ -602,6 +603,7 @@ internal class UVCCameraView(
     private fun isCameraOpened() = stateManager.isOpened()
 
     fun takePicture(callback: UVCStringCallback, savePath: String? = null) {
+        android.util.Log.d("takePicture", "UVCCameraView - savePath: $savePath")
         if (!isCameraOpened()) {
             callback.onError("Camera not open")
             return
