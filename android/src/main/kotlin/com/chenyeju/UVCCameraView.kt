@@ -617,10 +617,11 @@ internal class UVCCameraView(
             override fun onComplete(path: String?) {
                 if (path != null) {
                     callback.onSuccess(path)
-                    MediaScannerConnection.scanFile(view.context, arrayOf(path), null) { mPath, uri ->
-                        // File scanned into media database
-                        println("Media scan completed for file: $mPath with uri: $uri")
-                    }
+                    
+                    // MediaScannerConnection.scanFile(view.context, arrayOf(path), null) { mPath, uri ->
+                    //     // File scanned into media database
+                    //     println("Media scan completed for file: $mPath with uri: $uri")
+                    // }
                 } else {
                     callback.onError("Failed to save image")
                 }
