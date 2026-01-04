@@ -19,11 +19,26 @@ class UVCCameraViewParamsEntity {
   ///  DEFAULT_BANDWIDTH = 1
   final double? bandwidthFactor;
 
+  final bool? captureRawImage;
+  final bool? rawPreviewData;
+  final bool? aspectRatioShow;
+
+  /// camera preview width
+  final int? previewWidth;
+
+  /// camera preview height
+  final int? previewHeight;
+
   const UVCCameraViewParamsEntity({
     this.minFps = 10,
     this.maxFps = 60,
     this.bandwidthFactor = 1.0,
     this.frameFormat = 1,
+    this.captureRawImage,
+    this.rawPreviewData,
+    this.aspectRatioShow,
+    this.previewWidth,
+    this.previewHeight,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,7 +46,12 @@ class UVCCameraViewParamsEntity {
       "minFps": minFps,
       "maxFps": maxFps,
       "frameFormat": frameFormat,
-      "bandwidthFactor": bandwidthFactor
+      "bandwidthFactor": bandwidthFactor,
+      "captureRawImage": captureRawImage,
+      "rawPreviewData": rawPreviewData,
+      "aspectRatioShow": aspectRatioShow,
+      "previewWidth": previewWidth,
+      "previewHeight": previewHeight,
     };
   }
 }

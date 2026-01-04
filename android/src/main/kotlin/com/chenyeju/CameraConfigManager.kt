@@ -28,7 +28,7 @@ class CameraConfigManager {
     private var maxFps = DEFAULT_MAX_FPS
     private var frameFormat = DEFAULT_FRAME_FORMAT
     private var bandwidthFactor = DEFAULT_BANDWIDTH_FACTOR
-    private var captureRawImage = false
+    private var captureRawImage = true
     private var rawPreviewData = false
     private var aspectRatioShow = true
     
@@ -68,7 +68,9 @@ class CameraConfigManager {
             "minFps" to minFps,
             "maxFps" to maxFps,
             "frameFormat" to frameFormat,
-            "bandwidthFactor" to bandwidthFactor
+            "bandwidthFactor" to bandwidthFactor,
+            "previewWidth" to previewWidth,
+            "previewHeight" to previewHeight
         )
     }
     
