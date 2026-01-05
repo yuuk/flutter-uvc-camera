@@ -80,11 +80,16 @@ class CameraUVC(ctx: Context, device: UsbDevice, private val params: Any?
     }
 
     override fun getAllPreviewSizes(aspectRatio: Double?): MutableList<PreviewSize> {
+        var frameFormat = UVCCamera.FRAME_FORMAT_MJPEG
+        if (params is Map<*, *>) {
+            frameFormat = (params["frameFormat"] as? Number)?.toInt() ?: frameFormat
+        }
+
         val previewSizeList = arrayListOf<PreviewSize>()
         if (mUvcCamera?.supportedSizeList?.isNotEmpty() == true) {
             mUvcCamera?.supportedSizeList
         }  else {
-            mUvcCamera?.getSupportedSizeList(UVCCamera.FRAME_FORMAT_YUYV)
+            mUvcCamera?.getSupportedSizeList(frameFormat)
         }?.let { sizeList ->
             if (mCameraPreviewSize.isEmpty()) {
                 mCameraPreviewSize.clear()
